@@ -3,22 +3,26 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { transactionReducer } from "./reducers/transactionReducers";
 import { Provider } from "react-redux";
+import thunk from "redux-thunk";
 if (localStorage.getItem("transactions") == null)
   localStorage.setItem("transactions", JSON.stringify([]));
 let initialState = {
   currentIndex: -1,
   list: JSON.parse(localStorage.getItem("transactions")),
 };
+
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   transactionReducer,
   initialState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__({
-      serialize: true,
-    })
+  // window.__REDUX_DEVTOOLS_EXTENSION__ &&
+  //   window.__REDUX_DEVTOOLS_EXTENSION__({
+  //     serialize: true,
+  //   }),
+  composeEnhancer(applyMiddleware(thunk))
 );
 
 ReactDOM.render(

@@ -1,7 +1,6 @@
 export const insert = (data) => {
-  return {
-    type: "INSERT",
-    payload: data,
+  return (dispatch) => {
+    dispatch({ type: "INSERT", payload: data });
   };
 };
 
