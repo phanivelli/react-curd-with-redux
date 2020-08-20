@@ -15,6 +15,8 @@ import {
   withStyles,
 } from "@material-ui/core";
 import { Table } from "@material-ui/core";
+// import TransForm from "./TransForm";
+import TransForm from "./TransForm";
 
 const styles = (theme) => ({
   tabBorder: {
@@ -47,7 +49,11 @@ class TransactionList extends Component {
     const { classes } = this.props;
     return (
       <>
-        <TransactionForm />
+        {/* <TransactionForm /> */}
+        <TransForm />
+        {/* <InputForm /> */}
+        {/* <Login /> */}
+        {/* <FormikTransactionApp /> */}
         <div className={classes.table}>
           <Table className={classes.tabBorder}>
             <TableHead>
@@ -72,7 +78,9 @@ class TransactionList extends Component {
                         color="primary"
                         variant="contained"
                         startIcon={<EditIcon />}
-                        onClick={() => this.handleEdit(index)}
+                        onClick={() => {
+                          this.handleEdit(index);
+                        }}
                       >
                         Edit
                       </Button>{" "}
